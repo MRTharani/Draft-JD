@@ -19,10 +19,10 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t $DOCKER_IMAGE_NAME:${{ github.sha }} .
-        docker tag $DOCKER_IMAGE_NAME:${{ github.sha }} $DOCKER_IMAGE_NAME:latest
+        docker build -t $DOCKER_IMAGE_NAME:main .
+        docker tag $DOCKER_IMAGE_NAME:main $DOCKER_IMAGE_NAME:latest
 
     - name: Push Docker image
       run: |
-        docker push $DOCKER_IMAGE_NAME:${{ github.sha }}
+        docker push $DOCKER_IMAGE_NAME:main
         docker push $DOCKER_IMAGE_NAME:latest
