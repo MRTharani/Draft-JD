@@ -32,30 +32,6 @@ if db is not None:
 
 
 
-def send_photo(photo, link, chat_id):
-    try:
-        url = f'https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto'
-        payload = {
-            'chat_id': chat_id,
-            'photo': photo,
-            'caption': link
-        }
-        response = requests.post(url, data=payload)
-        response.raise_for_status()  # Ensure we handle HTTP errors
-        print("Message Sent: " + str(response.json().get('ok', False)))
-    except requests.exceptions.RequestException as e:
-        print(f"Error sending message: {e}")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
-
-
-def generate_random_string(length=10):
-    """Generate a random string of fixed length."""
-    characters = string.ascii_letters + string.digits  # Includes uppercase, lowercase letters, and digits
-    random_string = ''.join(random.choice(characters) for _ in range(length))
-    return random_string
-
-
 async def process_file(url,directory_path):
     """Processes files in the given directory to generate thumbnails and clean up."""
     try:
@@ -71,9 +47,7 @@ async def process_file(url,directory_path):
                 # Generate the thumbnail
                 gen_thumb(file_path, thumbnail_name)
                 logging.info(f"Thumbnail generated: {thumbnail_name}")
-                img = await upload_thumb(thumbnail_name)
-                send_photo(img.media_link, "fuck urself", DUMP_ID)                
-                document = {"URL":url,"Video":msg.media_link,"Image":img.media_link}
+                document = {"URL":url}
                 insert_document(db, collection_name, document)
                 # Remove the original file
                 if os.path.exists(file_path):
