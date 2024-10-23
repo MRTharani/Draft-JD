@@ -36,7 +36,9 @@ app = Client(
     workers=30
 )
 
-      
+downloaded_files  = []
+
+
 async def process_file(app,url,directory_path):
     """Processes files in the given directory to generate thumbnails and clean up."""
     try:
