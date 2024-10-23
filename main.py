@@ -119,6 +119,7 @@ async def start_download():
         if video_links:
             for url in video_links:
               if url not in downloaded:
+                logging.info(f"Processing link : {url}")
                 response = add_links(device, url, "Draft")
                 check_for_new_links(device, device.linkgrabber)
                 process_and_move_links(device)
