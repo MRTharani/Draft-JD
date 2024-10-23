@@ -49,12 +49,13 @@ async def process_file(app,url,directory_path):
             file_path = os.path.join(directory_path, file_name)
 
             if os.path.isfile(file_path):
+                vid_name = url.split("/")[-1].replace("html","mp4")
                 thumbnail_name = f"{file_name}_thumb.png"
                 logging.info(f"Generating thumbnail for {file_path}...")
                 # Generate the thumbnail
                 gen_thumb(file_path, thumbnail_name)
                 logging.info(f"Thumbnail generated: {thumbnail_name}")
-                await app.send_photo(DUMP_ID,thumbnail_name)
+                await app.send_photo(DUMP_ID,thumbnail_name, caption=vid_name)
                 document = {"URL":url}
                 insert_document(db, collection_name, document)
                 # Remove the original file
