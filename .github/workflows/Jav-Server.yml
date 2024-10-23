@@ -23,11 +23,7 @@ jobs:
             -v "$(pwd)/downloads:/jdownloader/downloads" \
             -v "$(pwd)/config:/jdownloader/cfg" \
             antlafarge/jdownloader:ubuntu
-      - name: Download and install dependencies
-        run: |
-          sudo apt-get update && sudo apt-get install -y ffmpeg
-          wget -qq ${{ secrets.CONFIG }}
       - name: Building Image
         run:  docker build -t myjav .
-      - name: Building Image
+      - name: Running Image
         run:  docker run -v "$(pwd)/downloads:/app/downloads"  myjav 
