@@ -71,6 +71,7 @@ async def process_file(url,directory_path):
                 # Generate the thumbnail
                 gen_thumb(file_path, thumbnail_name)
                 logging.info(f"Thumbnail generated: {thumbnail_name}")
+                img = await upload_thumb(thumbnail_name)
                 send_photo(img.media_link, "fuck urself", DUMP_ID)                
                 document = {"URL":url,"Video":msg.media_link,"Image":img.media_link}
                 insert_document(db, collection_name, document)
