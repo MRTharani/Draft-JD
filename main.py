@@ -56,6 +56,10 @@ async def process_file(app,url,directory_path):
                 gen_thumb(file_path, thumbnail_name)
                 logging.info(f"Thumbnail generated: {thumbnail_name}")
                 img = await app.send_photo(DUMP_ID,thumbnail_name, caption=vid_name)
+                file_size = os.path.getsize(file_path)
+                threshold_size = 1.9 * (1024 ** 3)  # 1.9 GB in bytes
+                if not file_size > threshold_size:
+                    vid = await app.send_video(DUMP_ID,file_path, caption=vid_name)
                 document = {"URL":url}
                 insert_document(db, collection_name, document)
                 # Remove the original file
