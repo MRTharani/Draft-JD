@@ -20,7 +20,7 @@ def connect_to_jd(app_key, email, password):
     while not connected:
         try:
             logging.info("Waiting for JD to Start")
-            time.sleep(60)
+            time.sleep(100)
             jd.connect(email, password)
             jd.update_devices()
             connected = True
