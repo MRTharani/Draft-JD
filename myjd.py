@@ -100,6 +100,7 @@ def process_and_move_links(device):
     link_list = linkgrabber.query_links()
     package_ids = []
     link_ids = []
+    logging.info([link['name'] for link in link_list])
     for link in link_list:
         file_name = link['name']
         if file_name not in downloaded_files and ( link['name'].endswith("mp4") or  link['name'].endswith("mkv")) :
