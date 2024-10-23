@@ -94,6 +94,7 @@ def check_for_new_links(device, linkgrabber):
 
 
 def process_and_move_links(device):
+    time.sleep(5)
     linkgrabber = device.linkgrabber
     downloads = device.downloads.query_links()
     downloaded_files = {link['name'] for link in downloads}
@@ -109,7 +110,7 @@ def process_and_move_links(device):
     if link_ids:
         try:
             linkgrabber.move_to_downloadlist(link_ids, package_ids)
-            time.sleep(2)
+            time.sleep(5)
             linkgrabber.clear_list()
             logging.info("Moved new links to download list.")
         except myjdapi.exception.MYJDConnectionException as e:
