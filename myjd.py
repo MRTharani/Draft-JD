@@ -45,7 +45,7 @@ def clear_downloads(device):
     except myjdapi.exception.MYJDConnectionException as e:
         logging.error(f"Failed to clear downloads: {e}")
 
-def add_links(device, url, package_name,hash):
+def add_links(device, url, package_name):
     """Add links to the Linkgrabber with the specified package name."""
     folder = f"/jdownloader/downloads/"
 
