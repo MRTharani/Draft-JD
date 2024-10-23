@@ -121,7 +121,6 @@ async def start_download():
                 process_and_move_links(device)
                 await check_downloads(app,device,url,f"downloads/")
                 clear_downloads(device)
-    
     except Exception as e:
         logging.error(f"Error in start_download: {e}")
 
